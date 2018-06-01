@@ -1,58 +1,172 @@
-// const Employment = Object.create({
-//     company: {
-//         value: "Alana Healthcare"
-//     },
-//     position: {
-//         value: "Business Analyst"
-//     },
-//     dateStarted: {
-//         value: "October 2016" 
-//     },
-//     dateEnded: {
-//         value: "April 2018"
-//     },
-//     location: {
-//         value: "Nashville, TN"
-//     }
-// })
+// Practice - Creat Initial Jobs
 
-// console.log(Employment);
+const ahc = Object.create({}, {
+    company: {
+        value: "Alana Healthcare",
+        enumerable: true,
+        writable: true
+    },
+    position: {
+        value: "Business Analyst",
+        enumerable: true,
+        writable: true
+    },
+    dateStarted: {
+        value: "October 2016",
+        enumerable: true,
+        writable: true 
+    },
+    dateEnded: {
+        value: "April 2018", 
+        enumerable: true,
+        writable: true
+    },
+    location: {
+        value: "Nashville, TN",
+        enumerable: true,
+        writable: true
+    },
+    salary: {
+        value: "xxxx",
+        enumerable: false,
+        writable: false
+    }
+});
+
+const twentyFirst = Object.create({}, {
+    company: {
+        value: "21st Mortgage",
+        enumerable: true,
+        writable: true
+    },
+    position: {
+        value: "Financial Counselor",
+        enumerable: true,
+        writable: true
+    },
+    dateStarted: {
+        value: "June 2016",
+        enumerable: true,
+        writable: true 
+    },
+    dateEnded: {
+        value: "September 2016", 
+        enumerable: true,
+        writable: true
+    },
+    location: {
+        value: "Knoxville, TN",
+        enumerable: true,
+        writable: true
+    },
+    salary: {
+        value: "xxxx",
+        enumerable: false,
+        writable: false
+    }
+})
+
+const mrh = Object.create({}, {
+    company: {
+        value: "Maury Regional Medical Center",
+        enumerable: true,
+        writable: true
+    },
+    position: {
+        value: "Logistics Analyst Intern",
+        enumerable: true,
+        writable: true
+    },
+    dateStarted: {
+        value: "May 2015",
+        enumerable: true,
+        writable: true 
+    },
+    dateEnded: {
+        value: "August 2015", 
+        enumerable: true,
+        writable: true
+    },
+    location: {
+        value: "Columbia, TN",
+        enumerable: true,
+        writable: true
+    },
+    salary: {
+        value: "xxxx",
+        enumerable: false,
+        writable: false
+    }
+})
 
 // Challenge 
 
-const myJobs = (company, position, dateStarted, dateEnded, location, id) => {
-    let emp = {};
-        emp.company = company;
-        emp.position = position;
-        emp.dateStarted = dateStarted;
-        emp.dateEnded = dateEnded;
-        emp.location = location;
-        return emp;
+const addJob = (companyVal, positionVal, dateStartedVal, dateEndedVal, locationVal) => {
+    let newJob = Object.create({}, {
+        company: {
+            value: companyVal,
+            enumerable: true,
+            writable: true
+        },
+        position: {
+            value: positionVal,
+            enumerable: true,
+            writable: true
+        },
+        dateStarted: {
+            value: dateStartedVal,
+            enumerable: true,
+            writable: true 
+        },
+        dateEnded: {
+            value: dateEndedVal, 
+            enumerable: true,
+            writable: true
+        },
+        location: {
+            value: locationVal,
+            enumerable: true,
+            writable: true
+        }
+    }) 
+    return newJob;  
 }
+
+let anotherJob = addJob("Nashville Software School", "Student", "May 2018", "November 2018", "Nashville, TN");
+console.log(anotherJob);
+
+let thirdJob = ahc;
+console.log(ahc);
+
+let secondJob = twentyFirst;
+console.log(secondJob);
+
+let firstJob = mrh;
+console.log(mrh);
 
 // Advanced Challenge
 
 // 1.
-let firstJob = myJobs("Vanderbilt-University", "Research Assisstant", "June 2015", "August 2015", "Nashville, TN");
-let secondJob = myJobs("21st-Mortgage", "Financial Counselor", "June 2016", "September 2016", "Knoxville, TN");
-let thirdJob = myJobs("Alana-Healthcare", "Business Analyst", "October 2016", "April 2018", "Nashville, TN");
 
+let jobsArray = [firstJob, secondJob, thirdJob, anotherJob];
 
 // 2. 
-
-const jobArray = [firstJob, secondJob, thirdJob];
 
 const parentDiv = document.querySelector("#parent-div");
 const article = document.createElement("article");
 
-const addText = (arr) => {
+const addText = arr => {
     for (let i = 0; i < arr.length; i++) {
-        // jobArray[i].setAttribute("id", jobArray[i]['company']);
-        let appendText = document.createElement("h4");
-        appendText.textContent = jobArray[i];
-        article.appendChild(appendText);
-    }
+        const ul = document.createElement("ul");
+        ul.setAttribute("id", arr[i]['company']);
+        for (let j in arr[i]) {
+            let li = document.createElement("li");
+            li.innerHTML += `${arr[i][j]} `;
+            ul.appendChild(li);
+        }
+        article.appendChild(ul);
+    }  
 }
 
 parentDiv.appendChild(article);
-addText(jobArray);
+addText(jobsArray);
